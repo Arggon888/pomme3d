@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pomme 3D — Créations imprimées en 3D</title>
+<meta name="description" content="Pomme 3D : décorations de Noël et objets imprimés en 3D, imprimés couche par couche. Catalogue complet sur demande par e-mail.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600&family=Nunito:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--rouge:#D94B3F;--rouge-f:#7A2620;--vert:#5B9E4A;--creme:#FBF6F0;--texte:#3A2A26;--gris:#7d6e69;--blanc:#fff}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Nunito',sans-serif;color:var(--texte);background:var(--creme);line-height:1.6}
+h1,h2,h3,.logo-txt,.btn{font-family:'Fredoka',sans-serif;font-weight:500}
+a{color:inherit}
+.wrap{max-width:1100px;margin:0 auto;padding:0 20px}
+header{position:sticky;top:0;z-index:10;background:rgba(251,246,240,.95);backdrop-filter:blur(6px);border-bottom:1px solid #eee2d8}
+.nav{display:flex;align-items:center;justify-content:space-between;height:68px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo svg{width:50px;height:48px}
+.logo-txt{font-size:26px;color:var(--rouge)}
+nav.links a{text-decoration:none;margin-left:22px;font-weight:600;color:var(--texte)}
+nav.links a:hover{color:var(--rouge)}
+.btn{display:inline-flex;align-items:center;gap:8px;background:var(--rouge);color:#fff;text-decoration:none;padding:12px 22px;border-radius:999px;font-size:17px;border:0;cursor:pointer}
+.btn:hover{background:var(--rouge-f)}
+.btn.vert{background:#25A244}.btn.vert:hover{background:#1c7f35}
+.btn.ghost{background:transparent;color:var(--rouge);border:2px solid var(--rouge)}
+.hero{padding:70px 0 60px;display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:center}
+.tag{display:inline-block;background:#fde3df;color:var(--rouge-f);padding:4px 14px;border-radius:999px;font-weight:600;font-size:14px;margin-bottom:14px}
+.hero h1{font-size:48px;line-height:1.1;margin-bottom:16px}
+.hero h1 span{color:var(--rouge)}
+.hero p{font-size:18px;color:var(--gris);margin-bottom:26px;max-width:520px}
+.hero .cta{display:flex;gap:12px;flex-wrap:wrap}
+.hero-art{display:flex;justify-content:center}
+.hero-art svg{width:100%;max-width:320px;height:auto}
+section{padding:60px 0}
+.titre{text-align:center;margin-bottom:34px}
+.titre h2{font-size:36px}
+.titre p{color:var(--gris)}
+.filtres{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:28px}
+.filtres button{font-family:'Fredoka';font-size:15px;border:2px solid #ead8cc;background:#fff;color:var(--texte);padding:7px 18px;border-radius:999px;cursor:pointer}
+.filtres button.on{background:var(--rouge);border-color:var(--rouge);color:#fff}
+.grille{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:22px}
+.carte{background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 2px 10px rgba(122,38,32,.07);display:flex;flex-direction:column;transition:transform .15s}
+.carte:hover{transform:translateY(-3px)}
+.photo{aspect-ratio:3/4;background:repeating-linear-gradient(180deg,#f7e4df 0 14px,#fbf1ee 14px 20px);display:flex;align-items:center;justify-content:center;position:relative}
+.photo img{width:100%;height:100%;object-fit:cover;object-position:50% 35%}.photo img.contain{object-fit:contain;background:#c9b8a5}
+.photo .ph{font-family:'Fredoka';color:#c9988f;font-size:14px}
+.badge{position:absolute;top:12px;left:12px;background:var(--vert);color:#fff;font-size:12px;font-weight:600;padding:3px 10px;border-radius:999px}
+.badge.janv{background:var(--rouge-f)}
+.carte .info{padding:16px 18px 18px;display:flex;flex-direction:column;gap:6px;flex:1}
+.carte h3{font-size:19px}
+.carte p{font-size:14px;color:var(--gris);flex:1}
+.carte a.demande{font-family:'Fredoka';font-size:15px;color:var(--rouge);text-decoration:none;margin-top:6px}
+.carte a.demande:hover{text-decoration:underline}
+.exception{background:#fff}
+.exc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:26px}
+.exc{display:flex;gap:18px;background:var(--creme);border-radius:18px;padding:18px;align-items:center}
+.exc .photo{width:140px;flex:none;border-radius:12px}
+.exc h3{font-size:21px;margin-bottom:4px}
+.exc p{font-size:15px;color:var(--gris)}
+.etapes{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:22px}
+.etape{background:#fff;border-radius:18px;padding:26px;text-align:center}
+.etape .n{width:46px;height:46px;border-radius:50%;background:var(--rouge);color:#fff;font-family:'Fredoka';font-size:22px;display:flex;align-items:center;justify-content:center;margin:0 auto 12px}
+.etape h3{font-size:19px;margin-bottom:6px}
+.etape p{font-size:15px;color:var(--gris)}
+.apropos{display:grid;grid-template-columns:1fr 1.4fr;gap:40px;align-items:center}
+.apropos svg{width:100%;max-width:260px;margin:0 auto;display:block}
+.apropos h2{font-size:34px;margin-bottom:14px}
+.apropos p{margin-bottom:12px}
+.contact{background:var(--rouge);color:#fff;text-align:center;border-radius:28px;padding:50px 24px;margin:0 20px}
+.contact h2{font-size:36px;margin-bottom:10px}
+.contact p{opacity:.92;margin-bottom:24px}
+.contact .btn{background:#fff;color:var(--rouge)}
+.contact .btn.vert{background:#25A244;color:#fff}
+.contact .coords{margin-top:22px;font-size:15px;opacity:.95}
+.neige{position:fixed;inset:0;pointer-events:none;z-index:5;overflow:hidden}.neige i{position:absolute;top:-12px;color:#fff;text-shadow:0 0 2px #d9c6bb;font-style:normal;animation:tombe linear infinite}@keyframes tombe{to{transform:translateY(110vh) rotate(360deg)}}
+header{border-bottom:0}header:after{content:"";display:block;height:6px;background:repeating-linear-gradient(90deg,#B3202A 0 18px,#fff 18px 24px,#5B9E4A 24px 42px,#fff 42px 48px)}
+.contact{background:#B3202A;background-image:radial-gradient(#ffffff22 2px,transparent 2px);background-size:26px 26px}
+body:not(.fetes) .noel,body:not(.fetes) .neige{display:none}
+.carte .photo,.exc .photo{cursor:zoom-in}
+#zoom{position:fixed;inset:0;z-index:50;background:rgba(40,20,18,.88);display:none;align-items:center;justify-content:center;padding:20px;cursor:zoom-out}
+#zoom.on{display:flex}#zoom img{max-width:100%;max-height:88vh;border-radius:14px;box-shadow:0 10px 40px rgba(0,0,0,.4)}#zoom p{position:absolute;bottom:18px;left:0;right:0;text-align:center;color:#fff;font-family:Fredoka;font-size:20px}#zoom b{position:absolute;top:14px;right:22px;color:#fff;font-size:36px;font-weight:400;cursor:pointer}
+.formulaire{max-width:560px;margin:0 auto;text-align:left;display:flex;flex-direction:column;gap:14px}
+.formulaire .ligne{display:flex;gap:14px}.formulaire .ligne label{flex:1}
+.formulaire label{display:flex;flex-direction:column;gap:5px;font-weight:600;font-size:15px}
+.formulaire input,.formulaire textarea{font:inherit;font-weight:400;color:var(--texte);border:0;border-radius:12px;padding:11px 14px;background:#fff;outline:3px solid transparent}
+.formulaire input:focus,.formulaire textarea:focus{outline-color:#f4c7c2}
+.formulaire button{align-self:center;margin-top:6px}
+#form-msg{text-align:center;font-weight:600;min-height:1.4em}
+@media(max-width:600px){.formulaire .ligne{flex-direction:column}}
+footer{text-align:center;padding:34px 20px;color:var(--gris);font-size:14px}
+@media(max-width:800px){.hero{grid-template-columns:1fr;padding-top:40px;text-align:center}.hero p{margin:0 auto 26px}.hero .cta{justify-content:center}.hero-art{order:-1}.hero-art svg{max-width:200px}.hero h1{font-size:36px}nav.links{display:none}.apropos{grid-template-columns:1fr;text-align:center}.exc{flex-direction:column;text-align:center}.exc .photo{width:100%}}
+</style>
+</head>
+<body class="fetes">
+<div class="neige noel" id="neige"></div>
+
+<svg width="0" height="0" style="position:absolute">
+<defs>
+<clipPath id="ap"><path d="M0,-35 C15,-50 55,-45 55,0 C55,40 25,60 0,50 C-25,60 -55,40 -55,0 C-55,-45 -15,-50 0,-35 Z"/></clipPath>
+<clipPath id="ht"><path d="M18,31 C0,21 -1.5,4 9,2.5 C14.25,1.75 18,6.25 18,10 C18,6.25 21.75,1.75 27,2.5 C37.5,4 36,21 18,31 Z"/></clipPath>
+<g id="pomme">
+<path d="M0,-35 C15,-50 55,-45 55,0 C55,40 25,60 0,50 C-25,60 -55,40 -55,0 C-55,-45 -15,-50 0,-35 Z" fill="#7A2620"/>
+<g clip-path="url(#ap)" fill="#D94B3F"><rect x="-60" y="-54" width="120" height="6.5"/><rect x="-60" y="-45" width="120" height="6.5"/><rect x="-60" y="-36" width="120" height="6.5"/><rect x="-60" y="-27" width="120" height="6.5"/><rect x="-60" y="-18" width="120" height="6.5"/><rect x="-60" y="-9" width="120" height="6.5"/><rect x="-60" y="0" width="120" height="6.5"/><rect x="-60" y="9" width="120" height="6.5"/><rect x="-60" y="18" width="120" height="6.5"/><rect x="-60" y="27" width="120" height="6.5"/><rect x="-60" y="36" width="120" height="6.5"/><rect x="-60" y="45" width="120" height="6.5"/><rect x="-60" y="54" width="120" height="6.5"/></g>
+<path d="M18,31 C0,21 -1.5,4 9,2.5 C14.25,1.75 18,6.25 18,10 C18,6.25 21.75,1.75 27,2.5 C37.5,4 36,21 18,31 Z" fill="#7A2620"/>
+<g clip-path="url(#ht)" fill="#fff"><rect x="-60" y="0" width="120" height="6.5"/><rect x="-60" y="9" width="120" height="6.5"/><rect x="-60" y="18" width="120" height="6.5"/><rect x="-60" y="27" width="120" height="6.5"/></g>
+<path d="M0,-35 Q2,-50 8,-58" fill="none" stroke="#6B4A2B" stroke-width="4" stroke-linecap="round"/>
+<path d="M6,-48 C20,-65 38,-60 40,-55 C30,-45 15,-44 6,-48 Z" fill="#5B9E4A"/>
+</g>
+<g id="bonnet" transform="translate(-22,12) rotate(-18 -9 -50)"><path d="M-36,-50 L18,-50 C14,-72 0,-88 -22,-90 C-38,-91 -48,-82 -50,-70 C-40,-77 -32,-70 -36,-50 Z" fill="#B3202A"/><rect x="-41" y="-57" width="64" height="13" rx="6.5" fill="#fff" stroke="#E3D3C9" stroke-width="1.5"/><circle cx="-50" cy="-69" r="7.5" fill="#fff" stroke="#E3D3C9" stroke-width="1.5"/></g>
+</defs>
+</svg>
+
+<header>
+<div class="wrap nav">
+<a href="#" class="logo" aria-label="Pomme 3D"><svg viewBox="-82 -84 144 140"><use href="#pomme"/><use class="noel" href="#bonnet"/></svg><span class="logo-txt">Pomme 3D</span></a>
+<nav class="links"><a href="#catalogue">Catalogue</a><a href="#exception">Pièces d'exception</a><a href="#apropos">À propos</a><a href="#contact">Contact</a></nav>
+</div>
+</header>
+
+<main>
+<div class="wrap hero">
+<div>
+<span class="tag">❄ Collection Noël 2026 ❄</span>
+<h1>Des créations <span>imprimées en 3D</span>, faites avec amour</h1>
+<p>Décorations de Noël, petits objets malins et pièces d'exception, imprimés couche par couche dans notre atelier.</p>
+<div class="cta">
+<a class="btn" href="#contact">Recevoir le catalogue</a>
+<a class="btn ghost" href="#catalogue">Voir les créations</a>
+</div>
+</div>
+<div class="hero-art"><svg viewBox="-82 -84 144 140"><use href="#pomme"/><use class="noel" href="#bonnet"/></svg></div>
+</div>
+
+<section id="catalogue">
+<div class="wrap">
+<div class="titre"><h2>Le catalogue</h2><p>Nos créations de saison, imprimées dans les couleurs de votre choix.</p></div>
+<div class="filtres" id="filtres"></div>
+<div class="grille" id="grille"></div>
+</div>
+</section>
+
+<section id="exception" class="exception">
+<div class="wrap">
+<div class="titre"><h2>Pièces d'exception</h2><p>Des pièces géantes, imprimées sur plusieurs jours.</p></div>
+<div class="exc-grid" id="exc"></div>
+</div>
+</section>
+
+<section id="apropos">
+<div class="wrap apropos">
+<svg viewBox="-82 -84 144 140"><use href="#pomme"/><use class="noel" href="#bonnet"/></svg>
+<div>
+<h2>Qui sommes-nous ?</h2>
+<p>Pomme 3D, c'est un couple passionné d'impression 3D. La pomme, c'est notre symbole — et le petit cœur, c'est nous deux.</p>
+<p>Chaque objet est imprimé chez nous, couche par couche, et vous est remis tel qu'il sort de l'imprimante. Tous les trois ou quatre mois, une nouvelle collection vient s'ajouter au catalogue.</p>
+</div>
+</div>
+</section>
+
+<section id="contact">
+<div class="contact">
+<h2>Une envie, une question ?</h2>
+<p>Remplissez ce petit formulaire, on vous répond avec plaisir et on vous envoie le catalogue complet.</p>
+<form id="form" class="formulaire" novalidate>
+<input type="hidden" name="access_key" value="cec98a72-7c74-4b5b-9f0b-35914cf4e83a">
+<input type="hidden" name="subject" value="Demande de catalogue — pomme3d.com">
+<input type="hidden" name="from_name" value="Site Pomme 3D">
+<input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
+<div class="ligne"><label>Prénom<input name="Prénom" required autocomplete="given-name"></label><label>Nom<input name="Nom" required autocomplete="family-name"></label></div>
+<label>Adresse e-mail<input type="email" name="email" required autocomplete="email"></label>
+<label>Message<textarea name="Message" rows="5" required>Bonjour, je souhaiterais recevoir votre catalogue complet avec les prix. Merci !</textarea></label>
+<button class="btn" type="submit">Envoyer</button>
+<div id="form-msg" role="status"></div>
+</form>
+<div class="coords">Ou directement : contact@pomme3d.com</div>
+</div>
+</section>
+</main>
+
+<div id="zoom" role="dialog" aria-label="Photo agrandie"><b aria-label="Fermer">×</b><img alt=""><p></p></div>
+<footer>© <span id="annee"></span> Pomme 3D — Créations imprimées en 3D · Belgique</footer>
+
+<script>
+/* Catalogue : pour changer de saison, modifie cette liste.
+   photo : nom du fichier dans le dossier "photos" (laisser "" tant qu'il n'y en a pas)
+   cat   : "noel" ou "maison" ; badge : texte facultatif */
+const OBJETS = [
+ {nom:"Sapins de Noël feuillus", cat:"noel", desc:"Un duo de sapins aux branches ondulées, coiffés d'une étoile dorée.", photo:"sapins-feuillage.jpg"},
+ {nom:"Sapins de Noël spirale", cat:"noel", desc:"Des sapins tout en spirale, élégants et modernes, avec leur étoile dorée.", photo:"sapins-spirale.jpg", badge:"Coup de cœur"},
+ {nom:"Bonhomme de neige", cat:"noel", desc:"Un grand bonhomme de neige strié, avec chapeau haut-de-forme et écharpe.", photo:"bonhomme-de-neige.jpg"},
+ {nom:"Casse-noisette", cat:"noel", desc:"Le soldat casse-noisette en version épurée, en rouge, blanc ou vert.", photo:"casse-noisettes.jpg"},
+ {nom:"Duo de cerfs — grand", cat:"noel", desc:"Deux cerfs majestueux au relief strié, un grand et un petit.", photo:"cerfs-grand-duo.jpg"},
+ {nom:"Duo de cerfs — design", cat:"noel", desc:"Deux têtes de cerf graphiques et arrondies, en version compacte.", photo:"cerfs-design.jpg"},
+ {nom:"Boule de Noël", cat:"noel", desc:"Boule à suspendre, légère et colorée, à personnaliser selon vos couleurs.", photo:"", badge:"Best-seller"},
+ {nom:"Boules de Noël animaux", cat:"noel", desc:"Petites boules à motifs d'animaux, parfaites pour le sapin des enfants.", photo:""},
+ {nom:"Ours tricoté", cat:"noel", desc:"Un ourson à l'effet tricot étonnant, tout en douceur.", photo:""},
+ {nom:"Duo de lapins", cat:"noel", desc:"Deux lapins assortis, un grand et un petit.", photo:""},
+ {nom:"Dessous-de-plat plante", cat:"maison", desc:"Dessous-de-plat décoratif en forme de feuillage.", photo:""},
+ {nom:"Rebord de fenêtre personnalisé", cat:"maison", desc:"Décoration de rebord, personnalisable avec un prénom ou un motif.", photo:""},
+ {nom:"Repose-livre", cat:"maison", desc:"Pour garder votre livre ouvert à la bonne page.", photo:""},
+ {nom:"Rehausseur pour étagère Billy", cat:"maison", desc:"Accessoire malin pour étagère Billy.", photo:""},
+ {nom:"Support de téléphone", cat:"maison", desc:"Support de bureau stable pour smartphone.", photo:""},
+ {nom:"Support de dentifrice", cat:"maison", desc:"Range-tube pratique pour la salle de bain.", photo:""},
+ {nom:"Maïs anti-stress", cat:"maison", desc:"Un épi de maïs articulé à manipuler — addictif !", photo:""}
+];
+const EXCEPTION = [
+ {nom:"Casse-noisette géant — 88 cm", desc:"Une pièce spectaculaire de près d'un mètre, en bleu, blanc et or, imprimée sur plusieurs jours.", photo:"casse-noisette-geant.jpg"},
+ {nom:"Sapin XXL", desc:"Un grand sapin imprimé, à installer dans l'entrée ou le salon.", photo:""}
+];
+/* ======================= */
+
+const ph = o => o.photo ? `<img src="photos/${o.photo}" alt="${o.nom}" loading="lazy"${o.fit?' class="contain"':''}>` : `<span class="ph">Photo à venir</span>`;
+document.getElementById('annee').textContent=new Date().getFullYear();
+
+function carte(o){return `<div class="carte"><div class="photo">${ph(o)}${o.badge?`<span class="badge">${o.badge}</span>`:''}</div><div class="info"><h3>${o.nom}</h3><p>${o.desc}</p></div></div>`}
+const CATS={tout:"Tout",noel:"Noël",maison:"Maison & pratique"};
+let actif="tout";
+function rendre(){
+ document.getElementById('filtres').innerHTML=Object.entries(CATS).map(([k,v])=>`<button class="${k===actif?'on':''}" data-k="${k}">${v}</button>`).join('');
+ document.getElementById('grille').innerHTML=OBJETS.filter(o=>actif==='tout'||o.cat===actif).map(carte).join('');
+}
+document.getElementById('filtres').addEventListener('click',e=>{if(e.target.dataset.k){actif=e.target.dataset.k;rendre()}});
+rendre();
+const n=document.getElementById('neige');for(let k=0;k<28;k++){const f=document.createElement('i');f.textContent='❄';f.style.left=Math.random()*100+'%';f.style.fontSize=(8+Math.random()*12)+'px';f.style.opacity=.5+Math.random()*.5;f.style.animationDuration=(9+Math.random()*12)+'s';f.style.animationDelay=(-Math.random()*20)+'s';n.appendChild(f)}
+document.getElementById('exc').innerHTML=EXCEPTION.map(o=>`<div class="exc"><div class="photo">${ph(o)}</div><div><h3>${o.nom}</h3><p>${o.desc}</p></div></div>`).join('');
+const z=document.getElementById('zoom');
+document.addEventListener('click',e=>{const p=e.target.closest('.photo');if(p&&p.querySelector('img')){const i=p.querySelector('img');z.querySelector('img').src=i.src;z.querySelector('img').alt=i.alt;z.querySelector('p').textContent=i.alt;z.classList.add('on');return}if(z.classList.contains('on')&&e.target.closest('#zoom'))z.classList.remove('on')});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')z.classList.remove('on')});
+const F=document.getElementById('form'),M=document.getElementById('form-msg');
+F.addEventListener('submit',async e=>{e.preventDefault();
+ if(!F.checkValidity()){M.textContent="Merci de remplir tous les champs avec une adresse e-mail valide.";return}
+ const b=F.querySelector('button');b.disabled=true;b.textContent='Envoi…';M.textContent='';
+ try{const r=await fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(Object.fromEntries(new FormData(F)))});
+  const j=await r.json();if(!j.success)throw 0;F.reset();M.textContent="Merci ! Votre demande est bien envoyée, on vous répond très vite.";}
+ catch(_){M.textContent="Oups, l'envoi n'a pas fonctionné. Écrivez-nous à contact@pomme3d.com.";}
+ b.disabled=false;b.textContent='Envoyer';});
+</script>
+</body>
+</html>
