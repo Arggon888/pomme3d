@@ -92,6 +92,7 @@ body:not(.fetes) .noel,body:not(.fetes) .neige{display:none}
 .patience{max-width:760px;margin:34px auto 0;background:#fff;border-left:5px solid var(--vert);border-radius:0 14px 14px 0;padding:18px 22px}.patience strong{font-family:Fredoka;font-weight:500;font-size:18px}.patience p{color:var(--gris);margin-top:4px}
 .chantier{display:flex;align-items:center;justify-content:center;gap:14px;text-align:center;padding:12px 18px;font-size:16px;color:#3a2a00;background:repeating-linear-gradient(-45deg,#FFD23F 0 22px,#FFC107 22px 44px);border-bottom:4px solid #3a2a00}.chantier span{font-size:24px}.chantier strong{font-family:Fredoka;font-weight:600}
 .taille{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);background:var(--rouge);color:#fff;font-family:Fredoka;font-weight:500;font-size:15px;padding:3px 14px;border-radius:999px;white-space:nowrap}
+.ref{font-size:12px;color:#b3a59f;letter-spacing:.5px}
 footer{text-align:center;padding:34px 20px;color:var(--gris);font-size:14px}
 @media(max-width:800px){.hero{grid-template-columns:1fr;padding-top:40px;text-align:center}.hero p{margin:0 auto 26px}.hero .cta{justify-content:center}.hero-art{order:-1}.hero-art svg{max-width:200px}.hero h1{font-size:36px}nav.links{display:none}.apropos{grid-template-columns:1fr;text-align:center}.exc{flex-direction:column;text-align:center}.exc .photo{width:100%}}
 </style>
@@ -175,7 +176,7 @@ footer{text-align:center;padding:34px 20px;color:var(--gris);font-size:14px}
 <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
 <div class="ligne"><label>Prénom<input name="Prénom" required autocomplete="given-name"></label><label>Nom<input name="Nom" required autocomplete="family-name"></label></div>
 <label>Adresse e-mail<input type="email" name="email" required autocomplete="email"></label>
-<label>Message<textarea name="Message" rows="5" required placeholder="Votre message…"></textarea></label>
+<label>Message<textarea name="Message" rows="5" required placeholder="Votre message… (indiquez la référence de l'objet, ex. N-08)"></textarea></label>
 <button class="btn" type="submit">Envoyer</button>
 <div id="form-msg" role="status"></div>
 </form>
@@ -191,55 +192,55 @@ footer{text-align:center;padding:34px 20px;color:var(--gris);font-size:14px}
    photo : nom du fichier dans le dossier "photos" (laisser "" tant qu'il n'y en a pas)
    cat   : "noel" ou "maison" ; badge : texte facultatif */
 const OBJETS = [
- {nom:"Sapins de Noël spirale", cat:"noel", desc:"Des sapins tout en spirale, élégants et modernes, avec leur étoile dorée.", photo:"sapins-spirale.jpg", badge:"Coup de cœur"},
- {nom:"Sapins de Noël feuillus", cat:"noel", desc:"Un duo de sapins aux branches ondulées, coiffés d'une étoile dorée.", photo:"sapins-feuillus.jpg"},
- {nom:"Bonhomme de neige", cat:"noel", desc:"Un grand bonhomme de neige strié, avec chapeau haut-de-forme et écharpe.", photo:"bonhomme-de-neige.jpg"},
- {nom:"Casse-noisette", cat:"noel", desc:"Le soldat casse-noisette en bleu, blanc et or.", photo:"casse-noisette.jpg"},
- {nom:"Trio de casse-noisettes", cat:"noel", desc:"Trois petits soldats, en rouge, blanc et vert.", photo:"casse-noisettes-trio.jpg"},
- {nom:"Duo de cerfs", cat:"noel", desc:"Deux cerfs majestueux au relief strié, un grand et un petit.", photo:"duo-de-cerfs.jpg"},
- {nom:"Duo de rennes design", cat:"noel", desc:"Deux rennes graphiques et arrondis.", photo:"duo-rennes-design.jpg"},
- {nom:"Père Noël tricoté", cat:"noel", desc:"Un Père Noël tout doux à l'effet tricot.", photo:"pere-noel-tricote.jpg", badge:"Coup de cœur"},
- {nom:"Flocons décoratifs", cat:"noel", desc:"Deux flocons de neige à poser, pour une déco d'hiver tout en douceur.", photo:"flocons-decoratifs.jpg"},
- {nom:"Bonhomme de neige tricoté", cat:"noel", desc:"Un petit bonhomme de neige en bonnet et écharpe, effet tricot.", photo:"bonhomme-tricote.jpg"},
- {nom:"Renne tricoté", cat:"noel", desc:"Un renne au nez rouge, effet tricot.", photo:"renne-tricote.jpg"},
- {nom:"Pain d'épice tricoté", cat:"noel", desc:"Un bonhomme pain d'épice souriant, effet tricot.", photo:"pain-epice-tricote.jpg"},
- {nom:"Ours tricoté", cat:"noel", desc:"Un ours polaire avec son bonnet de Père Noël, effet tricot.", photo:"ours-tricote.jpg"},
- {nom:"Sapin tricoté", cat:"noel", desc:"Un sapin vert à l'effet tricot, avec son étoile.", photo:"sapin-tricote.jpg"},
- {nom:"Renne au nez rouge", cat:"noel", desc:"Un renne assis avec son écharpe et son nez rouge.", photo:"renne-nez-rouge.jpg"},
- {nom:"Calendrier de l'Avent", cat:"noel", desc:"Une cheminée de Noël avec ses petits tiroirs à surprises.", photo:"calendrier-avent.jpg"},
- {nom:"Chapeau de Père Noël", cat:"noel", desc:"Un bonnet de Père Noël décoratif, avec son pompon.", photo:"chapeau-pere-noel.jpg"},
- {nom:"Étoile de sapin", cat:"noel", desc:"Une grande étoile dorée pour la cime du sapin.", photo:"etoile-sapin.jpg"},
- {nom:"Étoiles (lot de 3)", cat:"noel", desc:"Trois étoiles emboîtées à suspendre.", photo:"etoiles-lot-de-3.jpg"},
- {nom:"Boule pull de Noël", cat:"noel", desc:"Une boule en forme de pull de Noël, avec un prénom.", photo:"boule-pull.jpg", badge:"Personnalisable"},
- {nom:"Boule flocon tournante", cat:"noel", desc:"Une boule ajourée dont le flocon central tourne, avec un prénom.", photo:"boule-flocon-prenom.jpg", badge:"Personnalisable"},
- {nom:"Boule chat", cat:"noel", desc:"Une tête de chat aux flocons de neige, avec le petit nom de votre choix.", photo:"boule-chat.jpg", badge:"Personnalisable"},
- {nom:"Boule patte", cat:"noel", desc:"Une patte décorée de flocons, avec le nom de votre animal.", photo:"boule-patte.jpg", badge:"Personnalisable"},
- {nom:"Boule couronne photo", cat:"noel", desc:"Une petite couronne avec un emplacement pour votre photo.", photo:"boule-couronne-photo.jpg"},
- {nom:"Ronds de serviette de Noël", cat:"noel", desc:"Six ronds de serviette aux motifs de Noël.", photo:"ronds-de-serviette.jpg"},
- {nom:"Porte-serviettes flocon", cat:"noel", desc:"Un grand flocon de neige pour la table des fêtes.", photo:"porte-serviettes-flocon.jpg"},
- {nom:"Sous-verres flocons", cat:"noel", desc:"Des sous-verres en forme de flocons, avec leur support.", photo:"sous-verres-flocons.jpg"},
- {nom:"Crochets de guirlande", cat:"noel", desc:"Des crochets pour accrocher vos guirlandes lumineuses.", photo:"crochets-guirlande.jpg"},
- {nom:"Crochet de fenêtre", cat:"noel", desc:"Un crochet qui se pose sur le cadre de la fenêtre pour y suspendre vos décorations.", photo:"crochet-fenetre.jpg"},
- {nom:"Plante sous-verres", cat:"maison", desc:"Une plante monstera dont les feuilles deviennent des sous-verres.", photo:"plante-sous-verres.jpg", badge:"Coup de cœur"},
- {nom:"Organisateur de bureau", cat:"maison", desc:"Un set de rangement pour le bureau, en vert sauge.", photo:"organisateur-bureau.jpg"},
- {nom:"Support de téléphone", cat:"maison", desc:"Un support de téléphone réglable en inclinaison.", photo:"support-telephone.jpg"},
- {nom:"Maïs anti-stress", cat:"maison", desc:"Un épi de maïs aux grains articulés : addictif !", photo:"mais-anti-stress.jpg"},
- {nom:"Planche anti-stress", cat:"maison", desc:"Boutons, molettes et interrupteurs à manipuler sans fin.", photo:"planche-anti-stress.jpg"}
+ {nom:"Sapins de Noël spirale", cat:"noel", ref:"N-01", desc:"Des sapins tout en spirale, élégants et modernes, avec leur étoile dorée.", photo:"sapins-spirale.jpg", badge:"Coup de cœur"},
+ {nom:"Sapins de Noël feuillus", cat:"noel", ref:"N-02", desc:"Un duo de sapins aux branches ondulées, coiffés d'une étoile dorée.", photo:"sapins-feuillus.jpg"},
+ {nom:"Bonhomme de neige", cat:"noel", ref:"N-03", desc:"Un grand bonhomme de neige strié, avec chapeau haut-de-forme et écharpe.", photo:"bonhomme-de-neige.jpg"},
+ {nom:"Casse-noisette", cat:"noel", ref:"N-04", desc:"Le soldat casse-noisette en bleu, blanc et or.", photo:"casse-noisette.jpg"},
+ {nom:"Trio de casse-noisettes", cat:"noel", ref:"N-05", desc:"Trois petits soldats, en rouge, blanc et vert.", photo:"casse-noisettes-trio.jpg"},
+ {nom:"Duo de cerfs", cat:"noel", ref:"N-06", desc:"Deux cerfs majestueux au relief strié, un grand et un petit.", photo:"duo-de-cerfs.jpg"},
+ {nom:"Duo de rennes design", cat:"noel", ref:"N-07", desc:"Deux rennes graphiques et arrondis.", photo:"duo-rennes-design.jpg"},
+ {nom:"Père Noël tricoté", cat:"noel", ref:"N-08", desc:"Un Père Noël tout doux à l'effet tricot.", photo:"pere-noel-tricote.jpg", badge:"Coup de cœur"},
+ {nom:"Flocons décoratifs", cat:"noel", ref:"N-09", desc:"Deux flocons de neige à poser, pour une déco d'hiver tout en douceur.", photo:"flocons-decoratifs.jpg"},
+ {nom:"Bonhomme de neige tricoté", cat:"noel", ref:"N-10", desc:"Un petit bonhomme de neige en bonnet et écharpe, effet tricot.", photo:"bonhomme-tricote.jpg"},
+ {nom:"Renne tricoté", cat:"noel", ref:"N-11", desc:"Un renne au nez rouge, effet tricot.", photo:"renne-tricote.jpg"},
+ {nom:"Pain d'épice tricoté", cat:"noel", ref:"N-12", desc:"Un bonhomme pain d'épice souriant, effet tricot.", photo:"pain-epice-tricote.jpg"},
+ {nom:"Ours tricoté", cat:"noel", ref:"N-13", desc:"Un ours polaire avec son bonnet de Père Noël, effet tricot.", photo:"ours-tricote.jpg"},
+ {nom:"Sapin tricoté", cat:"noel", ref:"N-14", desc:"Un sapin vert à l'effet tricot, avec son étoile.", photo:"sapin-tricote.jpg"},
+ {nom:"Renne au nez rouge", cat:"noel", ref:"N-15", desc:"Un renne assis avec son écharpe et son nez rouge.", photo:"renne-nez-rouge.jpg"},
+ {nom:"Calendrier de l'Avent", cat:"noel", ref:"N-16", desc:"Une cheminée de Noël avec ses petits tiroirs à surprises.", photo:"calendrier-avent.jpg"},
+ {nom:"Chapeau de Père Noël", cat:"noel", ref:"N-17", desc:"Un bonnet de Père Noël décoratif, avec son pompon.", photo:"chapeau-pere-noel.jpg"},
+ {nom:"Étoile de sapin", cat:"noel", ref:"N-18", desc:"Une grande étoile dorée pour la cime du sapin.", photo:"etoile-sapin.jpg"},
+ {nom:"Étoiles (lot de 3)", cat:"noel", ref:"N-19", desc:"Trois étoiles emboîtées à suspendre.", photo:"etoiles-lot-de-3.jpg"},
+ {nom:"Boule pull de Noël", cat:"noel", ref:"N-20", desc:"Une boule en forme de pull de Noël, avec un prénom.", photo:"boule-pull.jpg", badge:"Personnalisable"},
+ {nom:"Boule flocon tournante", cat:"noel", ref:"N-21", desc:"Une boule ajourée dont le flocon central tourne, avec un prénom.", photo:"boule-flocon-prenom.jpg", badge:"Personnalisable"},
+ {nom:"Boule chat", cat:"noel", ref:"N-22", desc:"Une tête de chat aux flocons de neige, avec le petit nom de votre choix.", photo:"boule-chat.jpg", badge:"Personnalisable"},
+ {nom:"Boule patte", cat:"noel", ref:"N-23", desc:"Une patte décorée de flocons, avec le nom de votre animal.", photo:"boule-patte.jpg", badge:"Personnalisable"},
+ {nom:"Boule couronne photo", cat:"noel", ref:"N-24", desc:"Une petite couronne avec un emplacement pour votre photo.", photo:"boule-couronne-photo.jpg"},
+ {nom:"Ronds de serviette de Noël", cat:"noel", ref:"N-25", desc:"Six ronds de serviette aux motifs de Noël.", photo:"ronds-de-serviette.jpg"},
+ {nom:"Porte-serviettes flocon", cat:"noel", ref:"N-26", desc:"Un grand flocon de neige pour la table des fêtes.", photo:"porte-serviettes-flocon.jpg"},
+ {nom:"Sous-verres flocons", cat:"noel", ref:"N-27", desc:"Des sous-verres en forme de flocons, avec leur support.", photo:"sous-verres-flocons.jpg"},
+ {nom:"Crochets de guirlande", cat:"noel", ref:"N-28", desc:"Des crochets pour accrocher vos guirlandes lumineuses.", photo:"crochets-guirlande.jpg"},
+ {nom:"Crochet de fenêtre", cat:"noel", ref:"N-29", desc:"Un crochet qui se pose sur le cadre de la fenêtre pour y suspendre vos décorations.", photo:"crochet-fenetre.jpg"},
+ {nom:"Plante sous-verres", cat:"maison", ref:"M-01", desc:"Une plante monstera dont les feuilles deviennent des sous-verres.", photo:"plante-sous-verres.jpg", badge:"Coup de cœur"},
+ {nom:"Organisateur de bureau", cat:"maison", ref:"M-02", desc:"Un set de rangement pour le bureau, en vert sauge.", photo:"organisateur-bureau.jpg"},
+ {nom:"Support de téléphone", cat:"maison", ref:"M-03", desc:"Un support de téléphone réglable en inclinaison.", photo:"support-telephone.jpg"},
+ {nom:"Maïs anti-stress", cat:"maison", ref:"M-04", desc:"Un épi de maïs aux grains articulés : addictif !", photo:"mais-anti-stress.jpg"},
+ {nom:"Planche anti-stress", cat:"maison", ref:"M-05", desc:"Boutons, molettes et interrupteurs à manipuler sans fin.", photo:"planche-anti-stress.jpg"}
 ];
 const EXCEPTION = [
- {nom:"Fusée lunaire", desc:"Notre plus grande pièce à ce jour, réalisée pour notre famille.", photo:"fusee-tintin.jpg", taille:"1,80 m"},
- {nom:"Casse-noisette géant", desc:"Une pièce spectaculaire de près d'un mètre, imprimée sur plusieurs jours.", photo:"casse-noisette-geant-88cm.jpg", taille:"88 cm"},
- {nom:"Gâteau de Noël XXL", desc:"Un gâteau géant à trois étages, décoré de sucres d'orge.", photo:"gateau-xxl.jpg", taille:"35 cm"},
- {nom:"Bonhomme de neige géant", desc:"Le bonhomme de neige tout rond, avec son chapeau, son écharpe et ses bras en bois.", photo:"bonhomme-de-neige-classique.jpg", taille:"50 cm"},
- {nom:"Sucre d'orge géant", desc:"Un grand sucre d'orge rayé rouge et blanc.", photo:"sucre-orge-geant.jpg", taille:"110 cm"},
- {nom:"Étoile de cime géante", desc:"Une étoile de cime surmontée de son petit héros et de son drapeau.", photo:"etoile-cime-mario.jpg", taille:""}
+ {nom:"Fusée lunaire", ref:"XXL-01", desc:"Notre plus grande pièce à ce jour, réalisée pour notre famille.", photo:"fusee-tintin.jpg", taille:"1,80 m"},
+ {nom:"Casse-noisette géant", ref:"XXL-02", desc:"Une pièce spectaculaire de près d'un mètre, imprimée sur plusieurs jours.", photo:"casse-noisette-geant-88cm.jpg", taille:"88 cm"},
+ {nom:"Gâteau de Noël XXL", ref:"XXL-03", desc:"Un gâteau géant à trois étages, décoré de sucres d'orge.", photo:"gateau-xxl.jpg", taille:"35 cm"},
+ {nom:"Bonhomme de neige géant", ref:"XXL-04", desc:"Le bonhomme de neige tout rond, avec son chapeau, son écharpe et ses bras en bois.", photo:"bonhomme-de-neige-classique.jpg", taille:"50 cm"},
+ {nom:"Sucre d'orge géant", ref:"XXL-05", desc:"Un grand sucre d'orge rayé rouge et blanc.", photo:"sucre-orge-geant.jpg", taille:"110 cm"},
+ {nom:"Étoile de cime géante", ref:"XXL-06", desc:"Une étoile de cime surmontée de son petit héros et de son drapeau.", photo:"etoile-cime-mario.jpg", taille:""}
 ];
 /* ======================= */
 
 const ph = o => o.photo ? `<img src="photos/${o.photo}" alt="${o.nom}" loading="lazy"${o.fit?' class="contain"':''}>` : `<span class="ph">Photo à venir</span>`;
 document.getElementById('annee').textContent=new Date().getFullYear();
 
-function carte(o){return `<div class="carte"><div class="photo">${ph(o)}${o.badge?`<span class="badge">${o.badge}</span>`:''}</div><div class="info"><h3>${o.nom}</h3><p>${o.desc}</p></div></div>`}
+function carte(o){return `<div class="carte"><div class="photo">${ph(o)}${o.badge?`<span class="badge">${o.badge}</span>`:''}</div><div class="info"><span class="ref">Réf. ${o.ref}</span><h3>${o.nom}</h3><p>${o.desc}</p></div></div>`}
 const CATS={tout:"Tout",noel:"Noël",maison:"Maison & pratique"};
 let actif="tout";
 function rendre(){
@@ -249,7 +250,7 @@ function rendre(){
 document.getElementById('filtres').addEventListener('click',e=>{if(e.target.dataset.k){actif=e.target.dataset.k;rendre()}});
 rendre();
 const n=document.getElementById('neige');for(let k=0;k<28;k++){const f=document.createElement('i');f.textContent='❄';f.style.left=Math.random()*100+'%';f.style.fontSize=(8+Math.random()*12)+'px';f.style.opacity=.5+Math.random()*.5;f.style.animationDuration=(9+Math.random()*12)+'s';f.style.animationDelay=(-Math.random()*20)+'s';n.appendChild(f)}
-document.getElementById('exc').innerHTML=EXCEPTION.map(o=>`<div class="exc"><div class="photo">${ph(o)}${o.taille?`<span class="taille">${o.taille}</span>`:''}</div><div><h3>${o.nom}</h3><p>${o.desc}</p></div></div>`).join('');
+document.getElementById('exc').innerHTML=EXCEPTION.map(o=>`<div class="exc"><div class="photo">${ph(o)}${o.taille?`<span class="taille">${o.taille}</span>`:''}</div><div><span class="ref">Réf. ${o.ref}</span><h3>${o.nom}</h3><p>${o.desc}</p></div></div>`).join('');
 const F=document.getElementById('form'),M=document.getElementById('form-msg');
 F.addEventListener('submit',async e=>{e.preventDefault();
  if(!F.checkValidity()){M.textContent="Merci de remplir tous les champs avec une adresse e-mail valide.";return}
