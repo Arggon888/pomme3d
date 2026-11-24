@@ -90,9 +90,14 @@ body:not(.fetes) .noel,body:not(.fetes) .neige{display:none}
 @media(max-width:600px){.formulaire .ligne{flex-direction:column}}
 .etape .n{font-size:22px;background:#fde3df}
 .patience{max-width:760px;margin:34px auto 0;background:#fff;border-left:5px solid var(--vert);border-radius:0 14px 14px 0;padding:18px 22px}.patience strong{font-family:Fredoka;font-weight:500;font-size:18px}.patience p{color:var(--gris);margin-top:4px}
-.chantier{display:flex;align-items:center;justify-content:center;gap:14px;text-align:center;padding:12px 18px;font-size:16px;color:#3a2a00;background:repeating-linear-gradient(-45deg,#FFD23F 0 22px,#FFC107 22px 44px);border-bottom:4px solid #3a2a00}.chantier span{font-size:24px}.chantier strong{font-family:Fredoka;font-weight:600}
+.chantier{position:fixed;top:50%;left:0;right:0;transform:translateY(-50%);z-index:40;pointer-events:none;opacity:.93;box-shadow:0 4px 18px rgba(0,0,0,.25);border-top:4px solid #3a2a00;display:flex;align-items:center;justify-content:center;gap:14px;text-align:center;padding:12px 18px;font-size:16px;color:#3a2a00;background:repeating-linear-gradient(-45deg,#FFD23F 0 22px,#FFC107 22px 44px);border-bottom:4px solid #3a2a00}.chantier span{font-size:24px}.chantier strong{font-family:Fredoka;font-weight:600}
 .taille{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);background:var(--rouge);color:#fff;font-family:Fredoka;font-weight:500;font-size:15px;padding:3px 14px;border-radius:999px;white-space:nowrap}
 .ref{font-size:12px;color:#b3a59f;letter-spacing:.5px}
+.refbox{display:flex;flex-wrap:wrap;gap:6px;align-items:center;background:#fff;border-radius:12px;padding:8px 10px}
+.refbox input{flex:1;min-width:180px;border:0;padding:4px;outline:0}
+.chip{display:inline-flex;align-items:center;gap:6px;background:#fde3df;color:#7A2620;font-weight:600;font-size:14px;padding:3px 10px;border-radius:999px;margin:2px}
+.chip b{cursor:pointer;font-weight:400}
+.ref{cursor:pointer}.ref:hover{color:var(--rouge)}
 footer{text-align:center;padding:34px 20px;color:var(--gris);font-size:14px}
 @media(max-width:800px){.hero{grid-template-columns:1fr;padding-top:40px;text-align:center}.hero p{margin:0 auto 26px}.hero .cta{justify-content:center}.hero-art{order:-1}.hero-art svg{max-width:200px}.hero h1{font-size:36px}nav.links{display:none}.apropos{grid-template-columns:1fr;text-align:center}.exc{flex-direction:column;text-align:center}.exc .photo{width:100%}}
 </style>
@@ -176,7 +181,10 @@ footer{text-align:center;padding:34px 20px;color:var(--gris);font-size:14px}
 <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
 <div class="ligne"><label>Prénom<input name="Prénom" required autocomplete="given-name"></label><label>Nom<input name="Nom" required autocomplete="family-name"></label></div>
 <label>Adresse e-mail<input type="email" name="email" required autocomplete="email"></label>
-<label>Message<textarea name="Message" rows="5" required placeholder="Votre message… (indiquez la référence de l'objet, ex. N-08)"></textarea></label>
+<label>Références des objets (facultatif)<div class="refbox" id="refbox"><span id="refchips"></span><input id="refin" list="reflist" placeholder="Tapez ou choisissez une référence, ex. N-08" autocomplete="off"></div></label>
+<datalist id="reflist"></datalist>
+<input type="hidden" name="Références" id="refhidden">
+<label>Message<textarea name="Message" rows="5" required placeholder="Votre message…"></textarea></label>
 <button class="btn" type="submit">Envoyer</button>
 <div id="form-msg" role="status"></div>
 </form>
@@ -240,7 +248,7 @@ const EXCEPTION = [
 const ph = o => o.photo ? `<img src="photos/${o.photo}" alt="${o.nom}" loading="lazy"${o.fit?' class="contain"':''}>` : `<span class="ph">Photo à venir</span>`;
 document.getElementById('annee').textContent=new Date().getFullYear();
 
-function carte(o){return `<div class="carte"><div class="photo">${ph(o)}${o.badge?`<span class="badge">${o.badge}</span>`:''}</div><div class="info"><span class="ref">Réf. ${o.ref}</span><h3>${o.nom}</h3><p>${o.desc}</p></div></div>`}
+function carte(o){return `<div class="carte"><div class="photo">${ph(o)}${o.badge?`<span class="badge">${o.badge}</span>`:''}</div><div class="info"><span class="ref" title="Ajouter à ma demande">Réf. ${o.ref}</span><h3>${o.nom}</h3><p>${o.desc}</p></div></div>`}
 const CATS={tout:"Tout",noel:"Noël",maison:"Maison & pratique"};
 let actif="tout";
 function rendre(){
@@ -250,13 +258,23 @@ function rendre(){
 document.getElementById('filtres').addEventListener('click',e=>{if(e.target.dataset.k){actif=e.target.dataset.k;rendre()}});
 rendre();
 const n=document.getElementById('neige');for(let k=0;k<28;k++){const f=document.createElement('i');f.textContent='❄';f.style.left=Math.random()*100+'%';f.style.fontSize=(8+Math.random()*12)+'px';f.style.opacity=.5+Math.random()*.5;f.style.animationDuration=(9+Math.random()*12)+'s';f.style.animationDelay=(-Math.random()*20)+'s';n.appendChild(f)}
-document.getElementById('exc').innerHTML=EXCEPTION.map(o=>`<div class="exc"><div class="photo">${ph(o)}${o.taille?`<span class="taille">${o.taille}</span>`:''}</div><div><span class="ref">Réf. ${o.ref}</span><h3>${o.nom}</h3><p>${o.desc}</p></div></div>`).join('');
+document.getElementById('exc').innerHTML=EXCEPTION.map(o=>`<div class="exc"><div class="photo">${ph(o)}${o.taille?`<span class="taille">${o.taille}</span>`:''}</div><div><span class="ref" title="Ajouter à ma demande">Réf. ${o.ref}</span><h3>${o.nom}</h3><p>${o.desc}</p></div></div>`).join('');
+
+const TOUS=[...OBJETS,...EXCEPTION];const choix=[];
+document.getElementById('reflist').innerHTML=TOUS.map(o=>`<option value="${o.ref}">${o.ref} — ${o.nom}</option>`).join('');
+function majRefs(){document.getElementById('refchips').innerHTML=choix.map(r=>{const o=TOUS.find(x=>x.ref===r);return `<span class="chip">${r}${o?' · '+o.nom:''} <b data-r="${r}" aria-label="Retirer">×</b></span>`}).join('');document.getElementById('refhidden').value=choix.map(r=>{const o=TOUS.find(x=>x.ref===r);return r+(o?' ('+o.nom+')':'')}).join(', ')}
+function ajoutRef(v){v=(v||'').trim().toUpperCase().split(' ')[0];if(TOUS.some(o=>o.ref===v)&&!choix.includes(v)){choix.push(v);majRefs()}}
+const RI=document.getElementById('refin');
+RI.addEventListener('change',()=>{ajoutRef(RI.value);RI.value=''});
+RI.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===','){e.preventDefault();ajoutRef(RI.value);RI.value=''}});
+document.getElementById('refchips').addEventListener('click',e=>{const r=e.target.dataset.r;if(r){choix.splice(choix.indexOf(r),1);majRefs()}});
+document.addEventListener('click',e=>{const el=e.target.closest('.ref');if(el){ajoutRef(el.textContent.replace('Réf. ',''));document.getElementById('contact').scrollIntoView({behavior:'smooth'})}});
 const F=document.getElementById('form'),M=document.getElementById('form-msg');
 F.addEventListener('submit',async e=>{e.preventDefault();
  if(!F.checkValidity()){M.textContent="Merci de remplir tous les champs avec une adresse e-mail valide.";return}
  const b=F.querySelector('button');b.disabled=true;b.textContent='Envoi…';M.textContent='';
  try{const r=await fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(Object.fromEntries(new FormData(F)))});
-  const j=await r.json();if(!j.success)throw 0;F.reset();M.textContent="Merci ! Votre demande est bien envoyée, on vous répond très vite.";}
+  const j=await r.json();if(!j.success)throw 0;F.reset();choix.length=0;majRefs();M.textContent="Merci ! Votre demande est bien envoyée, on vous répond très vite.";}
  catch(_){M.textContent="Oups, l'envoi n'a pas fonctionné. Écrivez-nous à contact@pomme3d.com.";}
  b.disabled=false;b.textContent='Envoyer';});
 </script>
