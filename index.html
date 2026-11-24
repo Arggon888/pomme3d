@@ -91,6 +91,7 @@ body:not(.fetes) .noel,body:not(.fetes) .neige{display:none}
 .etape .n{font-size:22px;background:#fde3df}
 .patience{max-width:760px;margin:34px auto 0;background:#fff;border-left:5px solid var(--vert);border-radius:0 14px 14px 0;padding:18px 22px}.patience strong{font-family:Fredoka;font-weight:500;font-size:18px}.patience p{color:var(--gris);margin-top:4px}
 .chantier{display:flex;align-items:center;justify-content:center;gap:14px;text-align:center;padding:12px 18px;font-size:16px;color:#3a2a00;background:repeating-linear-gradient(-45deg,#FFD23F 0 22px,#FFC107 22px 44px);border-bottom:4px solid #3a2a00}.chantier span{font-size:24px}.chantier strong{font-family:Fredoka;font-weight:600}
+.taille{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);background:var(--rouge);color:#fff;font-family:Fredoka;font-weight:500;font-size:15px;padding:3px 14px;border-radius:999px;white-space:nowrap}
 footer{text-align:center;padding:34px 20px;color:var(--gris);font-size:14px}
 @media(max-width:800px){.hero{grid-template-columns:1fr;padding-top:40px;text-align:center}.hero p{margin:0 auto 26px}.hero .cta{justify-content:center}.hero-art{order:-1}.hero-art svg{max-width:200px}.hero h1{font-size:36px}nav.links{display:none}.apropos{grid-template-columns:1fr;text-align:center}.exc{flex-direction:column;text-align:center}.exc .photo{width:100%}}
 </style>
@@ -118,7 +119,7 @@ footer{text-align:center;padding:34px 20px;color:var(--gris);font-size:14px}
 <header>
 <div class="wrap nav">
 <a href="#" class="logo" aria-label="Pomme 3D"><svg viewBox="-82 -84 144 140"><use href="#pomme"/><use class="noel" href="#bonnet"/></svg><span class="logo-txt">Pomme 3D</span></a>
-<nav class="links"><a href="#catalogue">Nos créations</a><a href="#exception">Nos réalisations</a><a href="#apropos">À propos</a><a href="#contact">Contact</a></nav>
+<nav class="links"><a href="#catalogue">Nos créations</a><a href="#exception">Réalisations XXL</a><a href="#apropos">À propos</a><a href="#contact">Contact</a></nav>
 </div>
 </header>
 
@@ -146,7 +147,7 @@ footer{text-align:center;padding:34px 20px;color:var(--gris);font-size:14px}
 
 <section id="exception" class="exception">
 <div class="wrap">
-<div class="titre"><h2>Nos réalisations</h2><p>Des pièces géantes, imprimées sur plusieurs jours, dont nous sommes particulièrement fiers.</p></div>
+<div class="titre"><h2>Nos réalisations XXL</h2><p>Des pièces géantes, imprimées sur plusieurs jours, dont nous sommes particulièrement fiers.</p></div>
 <div class="exc-grid" id="exc"></div>
 </div>
 </section>
@@ -198,8 +199,6 @@ const OBJETS = [
  {nom:"Duo de cerfs", cat:"noel", desc:"Deux cerfs majestueux au relief strié, un grand et un petit.", photo:"duo-de-cerfs.jpg"},
  {nom:"Duo de rennes design", cat:"noel", desc:"Deux rennes graphiques et arrondis.", photo:"duo-rennes-design.jpg"},
  {nom:"Père Noël tricoté", cat:"noel", desc:"Un Père Noël tout doux à l'effet tricot.", photo:"pere-noel-tricote.jpg", badge:"Coup de cœur"},
- {nom:"Bonhomme de neige classique", cat:"noel", desc:"Le bonhomme de neige tout rond, avec son chapeau, son écharpe et ses bras en bois.", photo:"bonhomme-de-neige-classique.jpg"},
- {nom:"Sucre d'orge géant", cat:"noel", desc:"Un grand sucre d'orge rayé rouge et blanc.", photo:"sucre-orge-geant.jpg"},
  {nom:"Flocons décoratifs", cat:"noel", desc:"Deux flocons de neige à poser, pour une déco d'hiver tout en douceur.", photo:"flocons-decoratifs.jpg"},
  {nom:"Bonhomme de neige tricoté", cat:"noel", desc:"Un petit bonhomme de neige en bonnet et écharpe, effet tricot.", photo:"bonhomme-tricote.jpg"},
  {nom:"Renne tricoté", cat:"noel", desc:"Un renne au nez rouge, effet tricot.", photo:"renne-tricote.jpg"},
@@ -228,10 +227,12 @@ const OBJETS = [
  {nom:"Planche anti-stress", cat:"maison", desc:"Boutons, molettes et interrupteurs à manipuler sans fin.", photo:"planche-anti-stress.jpg"}
 ];
 const EXCEPTION = [
- {nom:"Casse-noisette géant — 88 cm", desc:"Une pièce spectaculaire de près d'un mètre, imprimée sur plusieurs jours.", photo:"casse-noisette-geant-88cm.jpg"},
- {nom:"Gâteau de Noël XXL", desc:"Un gâteau géant à trois étages, décoré de sucres d'orge.", photo:"gateau-xxl.jpg"},
- {nom:"Étoile de cime géante", desc:"Une étoile de cime surmontée de son petit héros et de son drapeau.", photo:"etoile-cime-mario.jpg"},
- {nom:"Fusée lunaire — 1,80 m", desc:"Notre plus grande pièce à ce jour : 1,80 m de haut, réalisée pour notre famille.", photo:"fusee-tintin.jpg"}
+ {nom:"Fusée lunaire", desc:"Notre plus grande pièce à ce jour, réalisée pour notre famille.", photo:"fusee-tintin.jpg", taille:"1,80 m"},
+ {nom:"Casse-noisette géant", desc:"Une pièce spectaculaire de près d'un mètre, imprimée sur plusieurs jours.", photo:"casse-noisette-geant-88cm.jpg", taille:"88 cm"},
+ {nom:"Gâteau de Noël XXL", desc:"Un gâteau géant à trois étages, décoré de sucres d'orge.", photo:"gateau-xxl.jpg", taille:""},
+ {nom:"Bonhomme de neige géant", desc:"Le bonhomme de neige tout rond, avec son chapeau, son écharpe et ses bras en bois.", photo:"bonhomme-de-neige-classique.jpg", taille:""},
+ {nom:"Sucre d'orge géant", desc:"Un grand sucre d'orge rayé rouge et blanc.", photo:"sucre-orge-geant.jpg", taille:""},
+ {nom:"Étoile de cime géante", desc:"Une étoile de cime surmontée de son petit héros et de son drapeau.", photo:"etoile-cime-mario.jpg", taille:""}
 ];
 /* ======================= */
 
@@ -248,7 +249,7 @@ function rendre(){
 document.getElementById('filtres').addEventListener('click',e=>{if(e.target.dataset.k){actif=e.target.dataset.k;rendre()}});
 rendre();
 const n=document.getElementById('neige');for(let k=0;k<28;k++){const f=document.createElement('i');f.textContent='❄';f.style.left=Math.random()*100+'%';f.style.fontSize=(8+Math.random()*12)+'px';f.style.opacity=.5+Math.random()*.5;f.style.animationDuration=(9+Math.random()*12)+'s';f.style.animationDelay=(-Math.random()*20)+'s';n.appendChild(f)}
-document.getElementById('exc').innerHTML=EXCEPTION.map(o=>`<div class="exc"><div class="photo">${ph(o)}</div><div><h3>${o.nom}</h3><p>${o.desc}</p></div></div>`).join('');
+document.getElementById('exc').innerHTML=EXCEPTION.map(o=>`<div class="exc"><div class="photo">${ph(o)}${o.taille?`<span class="taille">${o.taille}</span>`:''}</div><div><h3>${o.nom}</h3><p>${o.desc}</p></div></div>`).join('');
 const F=document.getElementById('form'),M=document.getElementById('form-msg');
 F.addEventListener('submit',async e=>{e.preventDefault();
  if(!F.checkValidity()){M.textContent="Merci de remplir tous les champs avec une adresse e-mail valide.";return}
