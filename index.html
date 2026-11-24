@@ -80,9 +80,6 @@ section{padding:60px 0}
 header{border-bottom:0}header:after{content:"";display:block;height:6px;background:repeating-linear-gradient(90deg,#B3202A 0 18px,#fff 18px 24px,#5B9E4A 24px 42px,#fff 42px 48px)}
 .contact{background:#B3202A;background-image:radial-gradient(#ffffff22 2px,transparent 2px);background-size:26px 26px}
 body:not(.fetes) .noel,body:not(.fetes) .neige{display:none}
-.carte .photo,.exc .photo{cursor:zoom-in}
-#zoom{position:fixed;inset:0;z-index:50;background:rgba(40,20,18,.88);display:none;align-items:center;justify-content:center;padding:20px;cursor:zoom-out}
-#zoom.on{display:flex}#zoom img{max-width:100%;max-height:88vh;border-radius:14px;box-shadow:0 10px 40px rgba(0,0,0,.4)}#zoom p{position:absolute;bottom:18px;left:0;right:0;text-align:center;color:#fff;font-family:Fredoka;font-size:20px}#zoom b{position:absolute;top:14px;right:22px;color:#fff;font-size:36px;font-weight:400;cursor:pointer}
 .formulaire{max-width:560px;margin:0 auto;text-align:left;display:flex;flex-direction:column;gap:14px}
 .formulaire .ligne{display:flex;gap:14px}.formulaire .ligne label{flex:1}
 .formulaire label{display:flex;flex-direction:column;gap:5px;font-weight:600;font-size:15px}
@@ -186,7 +183,6 @@ footer{text-align:center;padding:34px 20px;color:var(--gris);font-size:14px}
 </section>
 </main>
 
-<div id="zoom" role="dialog" aria-label="Photo agrandie"><b aria-label="Fermer">×</b><img alt=""><p></p></div>
 <footer>© <span id="annee"></span> Pomme 3D — Créations imprimées en 3D · Belgique</footer>
 
 <script>
@@ -224,9 +220,6 @@ document.getElementById('filtres').addEventListener('click',e=>{if(e.target.data
 rendre();
 const n=document.getElementById('neige');for(let k=0;k<28;k++){const f=document.createElement('i');f.textContent='❄';f.style.left=Math.random()*100+'%';f.style.fontSize=(8+Math.random()*12)+'px';f.style.opacity=.5+Math.random()*.5;f.style.animationDuration=(9+Math.random()*12)+'s';f.style.animationDelay=(-Math.random()*20)+'s';n.appendChild(f)}
 document.getElementById('exc').innerHTML=EXCEPTION.map(o=>`<div class="exc"><div class="photo">${ph(o)}</div><div><h3>${o.nom}</h3><p>${o.desc}</p></div></div>`).join('');
-const z=document.getElementById('zoom');
-document.addEventListener('click',e=>{const p=e.target.closest('.photo');if(p&&p.querySelector('img')){const i=p.querySelector('img');z.querySelector('img').src=i.src;z.querySelector('img').alt=i.alt;z.querySelector('p').textContent=i.alt;z.classList.add('on');return}if(z.classList.contains('on')&&e.target.closest('#zoom'))z.classList.remove('on')});
-document.addEventListener('keydown',e=>{if(e.key==='Escape')z.classList.remove('on')});
 const F=document.getElementById('form'),M=document.getElementById('form-msg');
 F.addEventListener('submit',async e=>{e.preventDefault();
  if(!F.checkValidity()){M.textContent="Merci de remplir tous les champs avec une adresse e-mail valide.";return}
