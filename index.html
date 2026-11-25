@@ -271,6 +271,7 @@ document.getElementById('exc').innerHTML=EXCEPTION.map(o=>`<div class="exc"><div
 
 const ENCOURS=[
  {nom:"Chiffres géants lumineux", desc:"Une commande d'un ami pour un mariage : des chiffres d'un mètre de haut, creux et lumineux, pour faire briller le grand jour.", photo:"projet-chiffres.jpg"},
+ {nom:"Collection bar sur mesure", desc:"Pour un ami qui fabrique son propre amaretto : un tapis de bar et un seau à glace aux couleurs de sa marque. Santé !", photo:"projet-embleme.jpg"},
  {nom:"Figurine mystère XXL", desc:"Indice n°1 : il a choisi la pilule rouge et esquive les balles au ralenti. Indice n°2 : il vient d'une célèbre famille de petits personnages allemands de 7,5 cm… ici en version géante !", photo:"projet-figurine.jpg"}
 ];
 document.getElementById('encours').innerHTML=ENCOURS.map(o=>`<div class="exc"><div class="photo">${ph(o)}<span class="badge">En cours</span></div><div><h3>${o.nom}</h3><p>${o.desc}</p></div></div>`).join('');
