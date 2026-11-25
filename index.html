@@ -269,8 +269,8 @@ const n=document.getElementById('neige');for(let k=0;k<28;k++){const f=document.
 document.getElementById('exc').innerHTML=EXCEPTION.map(o=>`<div class="exc"><div class="photo">${ph(o)}${o.taille?`<span class="taille">${o.taille}</span>`:''}</div><div><span class="ref" title="Ajouter à ma demande">Réf. ${o.ref}</span><h3>${o.nom}</h3><p>${o.desc}</p>${o.note?`<p class="note">${o.note}</p>`:''}</div></div>`).join('');
 
 const ENCOURS=[
- {nom:"Figurine géante", desc:"Un personnage culte, imprimé en grand, pièce par pièce. Patience…", photo:"projet-figurine.jpg"},
- {nom:"Chiffres géants lumineux", desc:"Des chiffres d'un mètre de haut, creux et lumineux, pour sublimer les plus beaux jours.", photo:"projet-chiffres.jpg"}
+ {nom:"Chiffres géants lumineux", desc:"Une commande d'un ami pour un mariage : des chiffres d'un mètre de haut, creux et lumineux, pour faire briller le grand jour.", photo:"projet-chiffres.jpg"},
+ {nom:"Figurine mystère XXL", desc:"Indice n°1 : il a choisi la pilule rouge et esquive les balles au ralenti. Indice n°2 : il vient d'une célèbre famille de petits personnages allemands de 7,5 cm… ici en version géante !", photo:"projet-figurine.jpg"}
 ];
 document.getElementById('encours').innerHTML=ENCOURS.map(o=>`<div class="exc"><div class="photo">${ph(o)}<span class="badge">En cours</span></div><div><h3>${o.nom}</h3><p>${o.desc}</p></div></div>`).join('');
 const TOUS=[...OBJETS,...EXCEPTION];const choix=[];
