@@ -104,6 +104,9 @@ body:not(.fetes) .noel,body:not(.fetes) .neige{display:none}
 .lancement{display:none;text-align:center;background:#5B9E4A;color:#fff;font-family:Fredoka;font-weight:500;font-size:17px;padding:10px 16px}.lancement strong{font-weight:600}
 body.avant>*:not(.chantier):not(script){filter:blur(7px);pointer-events:none;user-select:none}
 body.avant{overflow:hidden}
+.rgpd{font-size:13px;opacity:.85;margin:14px auto 0;max-width:560px}.rgpd a{color:#fff;text-decoration:underline}
+.mentions{padding:30px 0 0}.mentions details{max-width:760px;margin:0 auto;background:#fff;border-radius:14px;padding:14px 20px}
+.mentions summary{cursor:pointer;font-family:Fredoka;font-weight:500;color:var(--gris)}.mentions h3{font-size:16px;margin:14px 0 4px}.mentions p{font-size:14px;color:var(--gris)}
 footer{text-align:center;padding:34px 20px;color:var(--gris);font-size:14px}
 @media(max-width:800px){.hero{grid-template-columns:1fr;padding-top:40px;text-align:center}.hero p{margin:0 auto 26px}.hero .cta{justify-content:center}.hero-art{order:-1}.hero-art svg{max-width:200px}.hero h1{font-size:36px}nav.links{display:none}.apropos{grid-template-columns:1fr;text-align:center}.exc{flex-direction:column;text-align:center}.exc .photo{width:100%}}
 </style>
@@ -201,12 +204,21 @@ footer{text-align:center;padding:34px 20px;color:var(--gris);font-size:14px}
 <button class="btn" type="submit">Envoyer</button>
 <div id="form-msg" role="status"></div>
 </form>
+<p class="rgpd">Vos coordonnées servent uniquement à vous répondre. Elles ne sont jamais transmises à des tiers ni utilisées à d'autres fins. <a href="#mentions">En savoir plus</a></p>
 <div class="coords">Ou directement : contact@pomme3d.com</div>
 </div>
 </section>
 </main>
 
-<footer>© <span id="annee"></span> Pomme 3D — Créations imprimées en 3D · Belgique</footer>
+<section id="mentions" class="mentions"><div class="wrap">
+<details><summary>Mentions légales &amp; vie privée</summary>
+<h3>Éditeur du site</h3><p>Pomme 3D — site d'exposition personnel de Florian et Justine. Contact : contact@pomme3d.com. Aucun objet présenté sur ce site n'est proposé à la vente.</p>
+<h3>Hébergement</h3><p>Site hébergé par GitHub Pages (GitHub, Inc., San Francisco, États-Unis). Nom de domaine enregistré chez OVHcloud (Roubaix, France).</p>
+<h3>Formulaire de contact</h3><p>Les informations envoyées par le formulaire (prénom, nom, adresse e-mail, message) sont transmises par le service Web3Forms et servent uniquement à vous répondre. Elles ne sont ni vendues, ni transmises à des tiers, ni utilisées à des fins publicitaires. Vous pouvez à tout moment demander leur consultation ou leur suppression en écrivant à contact@pomme3d.com.</p>
+<h3>Statistiques</h3><p>Ce site mesure son audience avec GoatCounter, un outil respectueux de la vie privée qui n'utilise aucun cookie et ne permet pas de vous identifier.</p>
+<h3>Propriété</h3><p>Les photos et textes de ce site appartiennent à Pomme 3D. Les modèles 3D imprimés restent la propriété de leurs créateurs respectifs.</p>
+</details></div></section>
+<footer>© <span id="annee"></span> Pomme 3D — Créations imprimées en 3D · Belgique · <a href="#mentions" onclick="document.querySelector('#mentions details').open=true" style="color:inherit">Mentions légales</a></footer>
 
 <script>
 /* Catalogue : pour changer de saison, modifie cette liste.
