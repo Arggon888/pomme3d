@@ -107,6 +107,10 @@ body.avant{overflow:hidden}
 .rgpd{font-size:13px;opacity:.85;margin:14px auto 0;max-width:560px}.rgpd a{color:#fff;text-decoration:underline}
 .mentions{padding:30px 0 0}.mentions details{max-width:760px;margin:0 auto;background:#fff;border-radius:14px;padding:14px 20px}
 .mentions summary{cursor:pointer;font-family:Fredoka;font-weight:500;color:var(--gris)}.mentions h3{font-size:16px;margin:14px 0 4px}.mentions p{font-size:14px;color:var(--gris)}
+.merci{position:fixed;inset:0;z-index:60;background:rgba(58,42,38,.55);display:none;align-items:center;justify-content:center;padding:20px}.merci.on{display:flex}
+.merci-box{background:#fff;border-radius:22px;padding:30px 28px;max-width:380px;text-align:center;box-shadow:0 12px 40px rgba(0,0,0,.25);animation:pop .25s ease}
+.merci-box h3{font-family:Fredoka;font-weight:600;font-size:26px;color:var(--rouge);margin:8px 0 6px}.merci-box p{color:var(--gris);margin-bottom:18px}
+@keyframes pop{from{transform:scale(.9);opacity:0}to{transform:scale(1);opacity:1}}
 footer{text-align:center;padding:34px 20px;color:var(--gris);font-size:14px}
 @media(max-width:800px){.hero{grid-template-columns:1fr;padding-top:40px;text-align:center}.hero p{margin:0 auto 26px}.hero .cta{justify-content:center}.hero-art{order:-1}.hero-art svg{max-width:200px}.hero h1{font-size:36px}nav.links{display:none}.apropos{grid-template-columns:1fr;text-align:center}.exc{flex-direction:column;text-align:center}.exc .photo{width:100%}}
 </style>
@@ -218,6 +222,11 @@ footer{text-align:center;padding:34px 20px;color:var(--gris);font-size:14px}
 <h3>Statistiques</h3><p>Ce site mesure son audience avec GoatCounter, un outil respectueux de la vie privée qui n'utilise aucun cookie et ne permet pas de vous identifier.</p>
 <h3>Propriété</h3><p>Les photos et textes de ce site appartiennent à Pomme 3D. Les modèles 3D imprimés restent la propriété de leurs créateurs respectifs.</p>
 </details></div></section>
+<div id="merci" class="merci" role="dialog" aria-modal="true" aria-labelledby="merci-t"><div class="merci-box">
+<svg viewBox="-82 -84 144 140" width="90" height="88" aria-hidden="true"><use href="#pomme"/></svg>
+<h3 id="merci-t">Merci<span id="merci-nom"></span> !</h3>
+<p>Votre message est bien arrivé chez nous 🍎<br>Nous vous répondons le plus vite possible.</p>
+<button class="btn" type="button" id="merci-ok">Fermer</button></div></div>
 <footer>© <span id="annee"></span> Pomme 3D — Créations imprimées en 3D · Belgique · <a href="#mentions" onclick="document.querySelector('#mentions details').open=true" style="color:inherit">Mentions légales</a></footer>
 
 <script>
@@ -307,12 +316,15 @@ function tick(){const n=Date.now(),d=L-n;
  if(d>0){const h=Math.floor(d/36e5),m=Math.floor(d%36e5/6e4),s=Math.floor(d%6e4/1e3);dc.textContent=String(h).padStart(2,'0')+' h '+String(m).padStart(2,'0')+' min '+String(s).padStart(2,'0')+' s';}
  else{document.body.classList.remove('avant');ch.style.display='none';la.style.display=n<FIN?'block':'none';clearInterval(t);}}
 const t=setInterval(tick,1000);tick();})();
+document.getElementById('merci-ok').addEventListener('click',()=>document.getElementById('merci').classList.remove('on'));
+document.getElementById('merci').addEventListener('click',e=>{if(e.target.id==='merci')e.currentTarget.classList.remove('on')});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')document.getElementById('merci').classList.remove('on')});
 const F=document.getElementById('form'),M=document.getElementById('form-msg');
 F.addEventListener('submit',async e=>{e.preventDefault();
  if(!F.checkValidity()){M.textContent="Merci de remplir tous les champs avec une adresse e-mail valide.";return}
  const b=F.querySelector('button');b.disabled=true;b.textContent='Envoi…';M.textContent='';
  try{const r=await fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(Object.fromEntries(new FormData(F)))});
-  const j=await r.json();if(!j.success)throw 0;F.reset();choix.length=0;majRefs();M.textContent="Merci ! Votre demande est bien envoyée, on vous répond très vite.";}
+  const j=await r.json();if(!j.success)throw 0;const pn=(F.elements['Prénom']||{}).value||'';document.getElementById('merci-nom').textContent=pn?' '+pn.trim():'';document.getElementById('merci').classList.add('on');document.getElementById('merci-ok').focus();F.reset();choix.length=0;majRefs();M.textContent="Merci ! Votre demande est bien envoyée, on vous répond très vite.";}
  catch(_){M.textContent="Oups, l'envoi n'a pas fonctionné. Écrivez-nous à contact@pomme3d.com.";}
  b.disabled=false;b.textContent='Envoyer';});
 </script>
