@@ -102,11 +102,13 @@ body:not(.fetes) .noel,body:not(.fetes) .neige{display:none}
 .mention{text-align:center;font-size:14px;color:var(--texte);padding:8px 16px;border-bottom:1px solid #eee2d8}
 .logo-col{display:flex;flex-direction:column;line-height:1.05}.slogan{font-family:Pacifico,cursive;font-size:13px;color:var(--texte);margin-top:2px}
 .lancement{display:none;text-align:center;background:#5B9E4A;color:#fff;font-family:Fredoka;font-weight:500;font-size:17px;padding:10px 16px}.lancement strong{font-weight:600}
+body.avant>*:not(.chantier):not(script){filter:blur(7px);pointer-events:none;user-select:none}
+body.avant{overflow:hidden}
 footer{text-align:center;padding:34px 20px;color:var(--gris);font-size:14px}
 @media(max-width:800px){.hero{grid-template-columns:1fr;padding-top:40px;text-align:center}.hero p{margin:0 auto 26px}.hero .cta{justify-content:center}.hero-art{order:-1}.hero-art svg{max-width:200px}.hero h1{font-size:36px}nav.links{display:none}.apropos{grid-template-columns:1fr;text-align:center}.exc{flex-direction:column;text-align:center}.exc .photo{width:100%}}
 </style>
 </head>
-<body class="fetes">
+<body class="fetes avant">
 <div class="neige noel" id="neige"></div>
 
 <svg width="0" height="0" style="position:absolute"><defs><g id="pomme"><defs><clipPath id="aps"><path d="M0,-35 C15,-50 55,-45 55,0 C55,40 25,60 0,50 C-25,60 -55,40 -55,0 C-55,-45 -15,-50 0,-35 Z"/></clipPath><clipPath id="hts"><path d="M18,31 C0,21 -1.5,4 9,2.5 C14.25,1.75 18,6.25 18,10 C18,6.25 21.75,1.75 27,2.5 C37.5,4 36,21 18,31 Z"/></clipPath></defs>
@@ -291,7 +293,7 @@ document.addEventListener('click',e=>{const el=e.target.closest('.ref');if(el){a
 const ch=document.getElementById('chantier'),la=document.getElementById('lancement'),dc=document.getElementById('decompte');
 function tick(){const n=Date.now(),d=L-n;
  if(d>0){const h=Math.floor(d/36e5),m=Math.floor(d%36e5/6e4),s=Math.floor(d%6e4/1e3);dc.textContent=String(h).padStart(2,'0')+' h '+String(m).padStart(2,'0')+' min '+String(s).padStart(2,'0')+' s';}
- else{ch.style.display='none';la.style.display=n<FIN?'block':'none';clearInterval(t);}}
+ else{document.body.classList.remove('avant');ch.style.display='none';la.style.display=n<FIN?'block':'none';clearInterval(t);}}
 const t=setInterval(tick,1000);tick();})();
 const F=document.getElementById('form'),M=document.getElementById('form-msg');
 F.addEventListener('submit',async e=>{e.preventDefault();
